@@ -33,6 +33,7 @@ import java.util.List;
 import org.antlr.v4.runtime.CommonToken;
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.misc.Interval;
+import org.bouncycastle.util.Arrays;
 
 /**
  * A small class that flattens an ANTLR4 {@code ParseTree}. Given the
@@ -75,8 +76,10 @@ public class AST {
 
         private final Parser parser;
         private final String code;
+        //private final byte[] code;
 
         public Context(Parser parser, String code) {
+        //public Context(Parser parser, byte[] code) {
             this.parser = parser;
             this.code = code;
         }
@@ -263,7 +266,13 @@ public class AST {
                     ////caption = String.valueOf(ast.payload) + " [" + ast.payload.getClass().getName() + "]";
                     //Interval interval = ast.node.getSourceInterval();
                     //caption = String.valueOf(ast.payload) + " <== " + ast.node.getText() + " " + interval.a + "->" + interval.b; //.replace("\n","\\n");
-                    caption = String.valueOf(ast.payload) + " <== " + this.context.code.substring(AST.getTokenStart(ast), AST.getTokenStop(ast)+1).replace("\n", "\\n");
+                    caption = String.valueOf(ast.payload) + " <== " + this.context.code.substring(AST.getTokenStart(ast), AST.getTokenStop(ast)+1).replace("\r\n", "\n").replace("\n", "\\n");
+                    /*
+                    caption = String.valueOf(ast.payload) + " <== "
+                            + my.IOUTils.newUtf8String(
+                                    Arrays.copyOfRange(this.context.code, AST.getTokenStart(ast), AST.getTokenStop(ast)+1))
+                                    .replace("\r\n", "\n").replace("\n", "\\n")
+                            ;*/
                 }
 
                 String indent = "";

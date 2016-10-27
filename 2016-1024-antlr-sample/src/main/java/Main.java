@@ -1,6 +1,8 @@
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -9,11 +11,19 @@ public class Main {
 
     public static void main(String[] args)
             throws Exception {
-        //String javaText = "import java.lang.*;\nimport.java.util.Date;";
-        //String javaText = "import.java.util.Date;";
-        String javaText = "package test;\nimport.java.util.Date;\npublic class A extends B { int x=0; }";
+        //InputStream is = Main.class.getResourceAsStream("/ParseTest/ParseTest.java");
+        //String javaText = org.apache.commons.io.IOUtils.toString(is, "UTF-8");
+        //InputStream bais = new ByteArrayInputStream(javaText.getBytes("utf-8"));
+        
+        String javaText = my.IOUTils.readUtf8StringFromFileInClassPath("/ParseTest/ParseTest.java");
         InputStream bais = new ByteArrayInputStream(javaText.getBytes("utf-8"));
-        ANTLRInputStream in = new ANTLRInputStream(bais);
+        
+        //byte[] javaText = my.IOUTils.readAllBytesFromFileInClassPath("/ParseTest/ParseTest.java");
+        //InputStream bais = new ByteArrayInputStream(javaText);
+        
+        Reader r = new InputStreamReader(bais, "UTF-8"); // e.g., euc-jp or utf-8
+        ANTLRInputStream in = new ANTLRInputStream(r);
+        //ANTLRInputStream in = new ANTLRInputStream(bais);
         Java8Lexer lexer = new Java8Lexer(in);
         CommonTokenStream tokens
                 = new CommonTokenStream(lexer);
