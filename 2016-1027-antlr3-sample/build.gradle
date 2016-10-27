@@ -17,9 +17,12 @@ repositories {
 
 dependencies {
     compile project(":common1")
-    //antlr "org.antlr:antlr:3.5.2" // use ANTLR version 3
-    antlr "org.antlr:antlr4:4.5" // use ANTLR version 4
-    ////compile group: 'com.github.rpgleparser', name: 'rpgleparser', version: '1.0.0' // https://mvnrepository.com/artifact/com.github.rpgleparser/rpgleparser
+    antlr "org.antlr:antlr:3.5.2" // use ANTLR version 3
+    //compile group: 'org.antlr', name: 'stringtemplate', version: '3.2.1' // https://mvnrepository.com/artifact/org.antlr/stringtemplate
+    //compile group: 'org.antlr', name: 'stringtemplate', version: '4.0.2' // https://mvnrepository.com/artifact/org.antlr/stringtemplate
+    //compile group: 'org.antlr', name: 'stringtemplate', version: '3.2' // https://mvnrepository.com/artifact/org.antlr/stringtemplate
+    
+    //antlr "org.antlr:antlr4:4.5" // use ANTLR version 4
     
     //groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.0.1'
     ////compile 'org.codehaus.groovy:groovy-all:2.4.7'

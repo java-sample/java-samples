@@ -30,10 +30,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.antlr.v4.runtime.CommonToken;
 import org.antlr.v4.runtime.Parser;
-import org.antlr.v4.runtime.misc.Interval;
-import org.bouncycastle.util.Arrays;
 
 /**
  * A small class that flattens an ANTLR4 {@code ParseTree}. Given the
