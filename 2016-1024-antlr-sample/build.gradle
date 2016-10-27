@@ -1,0 +1,66 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'application'
+mainClassName = 'Main'
+ext.mainClass = mainClassName
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+apply plugin: 'antlr'
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile project(":common1")
+    //antlr "org.antlr:antlr:3.5.2" // use ANTLR version 3
+    antlr "org.antlr:antlr4:4.5" // use ANTLR version 4
+    
+    //groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.0.1'
+    ////compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    //compile group: 'commons-configuration', name: 'commons-configuration', version: '1.10' // https://mvnrepository.com/artifact/commons-configuration/commons-configuration
+    
+    //compile group: 'org.apache.commons', name: 'commons-configuration2', version: '2.1' // https://mvnrepository.com/artifact/org.apache.commons/commons-configuration2
+    //compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3' // https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
+}
+
+war {
+    rootSpec.exclude("**/*.jar")
+}
+
+jar {
+    manifest {
+        attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': mainClassName
+        )
+    }
+}
+
+generateGrammarSource {
+    maxHeapSize = "64m"
+    arguments += ["-visitor", "-long-messages"]
+}
+
+/*
+task copyDependencies(type: Copy) {
+new File('build/libs').mkdirs()
+copy {
+from configurations.runtime
+into 'build/libs'
+}
+}*/
+
+/*task dist(type: Jar) {
+baseName = project.name + '-dist'
+from files(sourceSets.main.output.classesDir)
+from files(sourceSets.main.output.resourcesDir)
+from {configurations.compile.collect {zipTree(it)}}
+manifest {
+attributes 'Main-Class': mainClassName
+}
+}*/

@@ -1,0 +1,16 @@
+//import org.gradle.api.artifacts.*
+
+//apply plugin: 'base' // To add "clean" task to the root project.
+
+subprojects {
+    apply from: rootProject.file('common.gradle')
+}
+
+/*
+project(":2016-1011-youtube-sample") {
+    apply plugin: "java"
+    dependencies {
+        compile project(":common1")
+    }
+}
+*/
